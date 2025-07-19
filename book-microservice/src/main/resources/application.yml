@@ -1,0 +1,13 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: book-microservice
+  datasource:
+    url: ${DB_BOOKS}
+    username: ${USERNAME_BOOKS}
+    password: ${PASSWORD_BOOKS}
+  jpa:
+    hibernate:
+      ddl-auto: update
