@@ -2,9 +2,9 @@ package com.book.microservice.service;
 
 import com.book.microservice.dto.BookResponse;
 import com.book.microservice.entity.Book;
+import com.book.microservice.exception.BookNotFoundException;
 import com.book.microservice.exception.ResourceNotFoundException;
 import com.book.microservice.reporsitory.BookRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
@@ -59,14 +59,14 @@ public class BookServiceImpl implements BookService {
     }
 
     /**
-     * Retrieves book by id or else throw {@link EntityNotFoundException} if not found book
+     * Retrieves book by id or else throw {@link BookNotFoundException} if not found book
      * @param id {@link Integer} book id
      * @param messageException message if exception throw
      * @return Book
      */
     private Book findBookById(Integer id, String messageException) {
         return repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(messageException));
+                .orElseThrow(() -> new BookNotFoundException(messageException));
     }
 
     /**
