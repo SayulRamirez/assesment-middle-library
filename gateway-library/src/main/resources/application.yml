@@ -1,0 +1,16 @@
+server:
+  port: 8083
+spring:
+  application:
+    name: gateway-library
+  cloud:
+    gateway:
+      routes:
+        - id: book-microservice
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/v1/book/**
+        - id: loan-microservice
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/v1/loan/**
