@@ -19,6 +19,7 @@
 
   <modules>
     <module>book-microservice</module>
+    <module>loan-microservice</module>
   </modules>
 
   <properties>
