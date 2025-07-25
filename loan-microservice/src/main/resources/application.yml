@@ -1,0 +1,9 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: loan-microservice
+  data:
+    mongodb:
+      uri: ${URI_MONGO_DB}
