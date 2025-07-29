@@ -14,3 +14,12 @@ spring:
           uri: http://localhost:8082
           predicates:
             - Path=/api/v1/loan/**
+  datasource:
+    url: ${USER_DB}
+    username: ${USERNAME}
+    password: ${PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+secret:
+  key: ${SECRET_KEY}
