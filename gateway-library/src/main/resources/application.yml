@@ -23,3 +23,8 @@ spring:
       ddl-auto: update
 secret:
   key: ${SECRET_KEY}
+init:
+  names: ${INIT_NAMES}
+  username: ${INIT_USERNAME}
+  password: ${INIT_PASSWORD}
+  role: ${INIT_ROLE}
