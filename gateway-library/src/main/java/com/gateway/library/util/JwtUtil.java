@@ -1,5 +1,6 @@
 package com.gateway.library.util;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -21,23 +22,10 @@ public class JwtUtil {
     @Value("${secret.key}")
     private String SECRET;
 
-//    public String generateToken(UserDetails user) {
-//        return getToken(new HashMap<>(), user);
-//    }
-
     public String generateToken(String user) {
         return getToken(new HashMap<>(), user);
     }
 
-//    private String getToken(Map<String, Object> extraClaims, UserDetails user) {
-//        return Jwts.builder()
-//                .setClaims(extraClaims)
-//                .setSubject(user.getUsername())
-//                .setIssuedAt(new Date())
-//                .setExpiration(Date.from(Instant.now().plus(5L, ChronoUnit.HOURS)))
-//                .signWith(getKey(), SignatureAlgorithm.HS256)
-//                .compact();
-//    }
     private String getToken(Map<String, Object> extraClaims, String user) {
         return Jwts.builder()
                 .setClaims(extraClaims)
@@ -53,7 +41,7 @@ public class JwtUtil {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public String getUsernameFromToken(String token) {
+    public String getUsernameFromToken(String token) throws ExpiredJwtException {
         return Jwts.parserBuilder()
                 .setSigningKey(getKey())
                 .build()
