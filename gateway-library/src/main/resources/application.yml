@@ -7,11 +7,11 @@ spring:
     gateway:
       routes:
         - id: book-microservice
-          uri: http://localhost:8081
+          uri: ${BOOK_MICROSERVICE}
           predicates:
             - Path=/api/v1/book/**
         - id: loan-microservice
-          uri: http://localhost:8082
+          uri: ${LOAN_MICROSERVICE}
           predicates:
             - Path=/api/v1/loan/**
   datasource:
