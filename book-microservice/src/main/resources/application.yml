@@ -11,6 +11,3 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-storage:
-  base:
-    path: ${BOOK_STORAGE_PATH}

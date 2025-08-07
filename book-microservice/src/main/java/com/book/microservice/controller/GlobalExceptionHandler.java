@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -33,6 +34,18 @@ public class GlobalExceptionHandler {
 
         response.put("timestamp", LocalDateTime.now());
         response.put("message", e.getMessage());
+        response.put("code", HttpStatus.NOT_FOUND.value());
+
+        return response;
+    }
+
+    @ExceptionHandler(FileNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Map<String, Object> handleFileNotFoundException(FileNotFoundException e) {
+        Map<String, Object> response = new LinkedHashMap<>(3);
+
+        response.put("timestamp", LocalDateTime.now());
+        response.put("message", "No se encontro el recurso buscado");
         response.put("code", HttpStatus.NOT_FOUND.value());
 
         return response;
