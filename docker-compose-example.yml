@@ -1,0 +1,80 @@
+services:
+  book-microservice:
+    container_name: book-microservice
+    build: book-microservice
+    mem_limit: 512m
+    ports:
+      - "8081:8081"
+    environment:
+      DB_BOOKS: jdbc:mysql://mysql_library:3306/[El nombre de la base de datos que contendra los libros]
+      USERNAME_BOOKS: root
+      PASSWORD_BOOKS: [Password de MySQL]
+    restart: always
+    depends_on:
+      mysql_library:
+        condition: service_healthy
+
+  gateway-library:
+    container_name: gateway-library
+    build: gateway-library
+    mem_limit: 512m
+    ports:
+      - "8083:8083"
+    environment:
+      USER_DB: jdbc:mysql://mysql_library:3306/[El nombre de la base de datos que contendra los usuarios]
+      USERNAME: root
+      PASSWORD: [Password de MySQL]
+      SECRET_KEY: [Una llave secreta de al menos 32 caracteres]
+      INIT_NAMES: [Nombre de un usuario predeterminado]
+      INIT_USERNAME: [Correo de un usuario predeterminado]
+      INIT_PASSWORD: [Password de usuario predeterminado]
+      INIT_ROLE: [Rol READER o ADMIN]
+      BOOK_MICROSERVICE: http://book-microservice:8081
+      LOAN_MICROSERVICE: http://loan-microservice:8082
+    restart: always
+    depends_on:
+      mysql_library:
+        condition: service_healthy
+
+  mysql_library:
+    image: mysql:9.1.0
+    container_name: mysql_library
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: [Password de MySQL]
+      LANG: C.UTF-8
+    volumes:
+      - mysql_data_library:/var/lib/mysql
+      - ../init:/docker-entrypoint-initdb.d
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mongodb_library:
+    image: mongo:latest
+    container_name: mongodb_library
+    restart: unless-stopped
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo_data_library:/data/db
+
+  loan-microservice:
+    container_name: loan-microservice
+    build: loan-microservice
+    mem_limit: 512m
+    ports:
+      - "8082:8082"
+    environment:
+      URI_MONGO_DB: mongodb://mongodb_library:27017/[Nombre de la base de datos que contendra los prestamos]
+    restart: always
+    depends_on:
+      - mongodb_library
+
+volumes:
+  mysql_data_library:
+  mongo_data_library:
