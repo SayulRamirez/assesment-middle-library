@@ -1,6 +1,8 @@
 package com.loan.microservice.controller;
 
 import com.loan.microservice.exception.DocumentNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -21,6 +23,8 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalControllerAdvice extends ResponseEntityExceptionHandler {
 
+    private static final Logger log = LoggerFactory.getLogger(GlobalControllerAdvice.class);
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
             MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
@@ -40,6 +44,8 @@ public class GlobalControllerAdvice extends ResponseEntityExceptionHandler {
         response.put("timestamp: ", LocalDateTime.now());
         response.put("code: ", status.toString());
 
+        log.warn("Peticion con campos invalidos");
+
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
@@ -51,6 +57,8 @@ public class GlobalControllerAdvice extends ResponseEntityExceptionHandler {
         response.put("message", e.getMessage());
         response.put("timestamp", LocalDateTime.now());
         response.put("code", HttpStatus.NOT_FOUND);
+
+        log.warn("Excepcion documento: {}", e.getMessage());
 
         return response;
     }

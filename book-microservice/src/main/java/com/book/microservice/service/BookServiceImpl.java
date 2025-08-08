@@ -5,6 +5,8 @@ import com.book.microservice.entity.Book;
 import com.book.microservice.exception.BookNotFoundException;
 import com.book.microservice.reporsitory.BookRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
@@ -19,8 +21,12 @@ public class BookServiceImpl implements BookService {
 
     private final ResourceLoader resourceLoader;
 
+    private static final Logger log = LoggerFactory.getLogger(BookServiceImpl.class);
+
     @Override
     public List<BookResponse> getAll() {
+
+        log.info("Obteniendo todos los libros");
 
         return repository.findAll()
                 .stream()
@@ -38,15 +44,22 @@ public class BookServiceImpl implements BookService {
 
         Book book = findBookById(id, "No se encontro el libro buscado");
 
-        return loadResource("books/book_" + book.getId() + ".txt");
+        String path = "books/book_" + book.getId() + ".txt";
+
+        log.info("Obteniendo el libro con id: {} en la ruta: {}", id, path);
+
+        return loadResource(path);
     }
 
     @Override
     public Resource getCoverByBookId(Integer id) {
 
         Book book = findBookById(id, "No se encontro la caratula");
+        String path = "covers/cover_" + book.getId() + ".jpg";
 
-        return loadResource("covers/cover_" + book.getId() + ".jpg");
+        log.info("Obteniendo la portada con id: {} en la ruta: {}", id, path);
+
+        return loadResource(path);
     }
 
     /**

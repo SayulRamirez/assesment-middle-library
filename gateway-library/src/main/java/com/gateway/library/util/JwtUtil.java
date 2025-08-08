@@ -5,6 +5,8 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -22,11 +24,14 @@ public class JwtUtil {
     @Value("${secret.key}")
     private String SECRET;
 
+    private static final Logger log = LoggerFactory.getLogger(JwtUtil.class);
+
     public String generateToken(String user) {
         return getToken(new HashMap<>(), user);
     }
 
     private String getToken(Map<String, Object> extraClaims, String user) {
+        log.info("Generando JWT");
         return Jwts.builder()
                 .setClaims(extraClaims)
                 .setSubject(user)
@@ -42,6 +47,7 @@ public class JwtUtil {
     }
 
     public String getUsernameFromToken(String token) throws ExpiredJwtException {
+        log.info("Obteniendo el username del token");
         return Jwts.parserBuilder()
                 .setSigningKey(getKey())
                 .build()
@@ -52,6 +58,8 @@ public class JwtUtil {
 
     public boolean isTokenValid(String token, UserDetails user) {
         final String username = getUsernameFromToken(token);
+
+        log.info("Validando el token");
 
         return (username.equals(user.getUsername())) && !isTokenExpired(token);
     }
