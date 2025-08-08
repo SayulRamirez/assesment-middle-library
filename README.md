@@ -107,7 +107,7 @@ Respuestas:
 ## Microservicio Prestamos
 
 #### Creación del préstamo
-URL: http://localhost:8083/api/v1/loan 
+URL: http://localhost:8083/api/v1/loan  
 Método: POST  
 Cuerpo en formato json:
 ````
@@ -132,7 +132,7 @@ Respuestas:
 
 URL: http://localhost:8083/api/v1/loan/{idLoan}
 Método: PUT  
-Sin cuerpo:
+Sin cuerpo:  
 Parámetro de la url: id del prestamó
 
 Respuestas:
@@ -141,9 +141,9 @@ Respuestas:
 
 ##### Obtener todos los préstamos de un usuario por su id
 
-URL: http://localhost:8083/api/v1/loan/{idUser}
+URL: http://localhost:8083/api/v1/loan/{idUser}  
 Método: GET  
-Sin cuerpo:
+Sin cuerpo:  
 Parámetro de la url: id del usuario
 
 Respuestas:
@@ -161,9 +161,9 @@ Respuestas:
 ## Microservicio Libros
 
 #### Obtener el libro por su id
-URL: http://localhost:8083/api/v1/book/{id}
-Método: GET
-Sin cuerpo:
+URL: http://localhost:8083/api/v1/book/{id}  
+Método: GET  
+Sin cuerpo:  
 Parámetro de la url: id del libro
 
 Respuestas:
@@ -172,9 +172,9 @@ Respuestas:
 
 ##### Obtener la portada del libro por su id
 
-URL: http://localhost:8083/api/v1/book/{id}/cover
-Método: GET
-Sin cuerpo:
+URL: http://localhost:8083/api/v1/book/{id}/cover  
+Método: GET  
+Sin cuerpo:  
 Parámetro de la url: id del libro
 
 Respuestas:
@@ -183,8 +183,8 @@ Respuestas:
 
 ##### Obtener todos los libros disponibles
 
-URL: http://localhost:8083/api/v1/book/all
-Método: GET
+URL: http://localhost:8083/api/v1/book/all  
+Método: GET  
 Sin cuerpo:
 
 Respuestas:
