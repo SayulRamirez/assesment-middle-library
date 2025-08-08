@@ -7,3 +7,11 @@ spring:
   data:
     mongodb:
       uri: ${URI_MONGO_DB}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics
+  endpoint:
+    health:
+      show-details: always

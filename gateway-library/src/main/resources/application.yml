@@ -28,3 +28,11 @@ init:
   username: ${INIT_USERNAME}
   password: ${INIT_PASSWORD}
   role: ${INIT_ROLE}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics
+  endpoint:
+    health:
+      show-details: always

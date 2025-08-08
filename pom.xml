@@ -28,6 +28,13 @@
     <maven.compiler.release>17</maven.compiler.release>
   </properties>
 
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+  </dependencies>
+
   <build>
     <pluginManagement>
       <plugins>
