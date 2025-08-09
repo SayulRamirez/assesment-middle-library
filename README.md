@@ -11,6 +11,9 @@ seguridad de los accesos a los demás microservicios.
 * Se agregó el microservicio book :closed_book: para el manejo de lo relacionado a los libros
 * Se agregó el microsercvicio loan para el manejo de lo relacionado a los prestamos
 
+<img width="600" height="auto" alt="Diagrama de la arquitectura implementada en el proyecto" src="https://github.com/user-attachments/assets/03254709-d1b8-4854-af98-0bd74487a1f1" />
+
+
 ## Herramientas y tecnologías utilizadas:
 
 * Java  17	:coffee:
