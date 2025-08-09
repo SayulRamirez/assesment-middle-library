@@ -41,8 +41,8 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
-    public void toTurnIn(int idLoan) {
-        Loan loan = repository.findById(String.valueOf(idLoan))
+    public void toTurnIn(String idLoan) {
+        Loan loan = repository.findById(idLoan)
                 .orElseThrow(() -> new DocumentNotFoundException("No se encontro el prestamo con id: " + idLoan));
 
         log.info("Actualizando el estatus del prestamo: {}", idLoan);

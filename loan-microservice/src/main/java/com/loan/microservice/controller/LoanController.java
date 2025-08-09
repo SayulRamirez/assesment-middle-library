@@ -23,7 +23,7 @@ public class LoanController {
     }
 
     @PutMapping("{idLoan}")
-    public ResponseEntity<Void> toTurnIn(@PathVariable Integer idLoan) {
+    public ResponseEntity<Void> toTurnIn(@PathVariable String idLoan) {
         service.toTurnIn(idLoan);
         return ResponseEntity.ok().build();
     }

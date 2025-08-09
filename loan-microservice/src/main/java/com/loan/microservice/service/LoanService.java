@@ -8,7 +8,7 @@ public interface LoanService {
 
     LoanResponse addLoan(int idBook, int idUser);
 
-    void toTurnIn(int idLoan);
+    void toTurnIn(String idLoan);
 
     List<LoanResponse> findLoansByIdUser(int idUser);
 }
